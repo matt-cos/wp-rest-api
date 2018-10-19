@@ -1,3 +1,19 @@
-.post img {
-	width: 150px;
+body {
+	height: 100vh;
+	-webkit-background-size: cover;
+	background-size: cover;
+}
+
+.title {
+	-webkit-transition: 0.3s all;
+	-o-transition: 0.3s all;
+	transition: 0.3s all;
+}
+
+.title:hover {
+	/*font-size: 20px;*/
+	-webkit-transform: scale(1.2);
+	-ms-transform: scale(1.2);
+	-o-transform: scale(1.2);
+	transform: scale(1.2);
 }

@@ -8,34 +8,45 @@ request.onload = function(){
 	if (request.status >= 200 && request.status < 400) {
 		data.forEach(post => {
 			const singlePost = document.createElement('div');
-			singlePost.setAttribute('class', 'post post-id-' + post.id);
+			singlePost.setAttribute('class', 'row post post-id-' + post.id);
 			container.appendChild(singlePost);
 
-			// const postLink = post.link;
+			const column33 = document.createElement('div');
+			column33.setAttribute('class', 'column column-33');
+			singlePost.appendChild(column33);
+
 			const postLink = 'https://bmwmovement.org/wp-json/wp/v2/posts/' + post.id;
 
 			const link = document.createElement('a');
 			link.setAttribute('href', postLink);
-			link.setAttribute('class', 'title');
-			link.setAttribute('post-id', post.id);
-			link.textContent = post.title.rendered;
-			singlePost.appendChild(link);
-
-			console.log(post);
-
+			link.setAttribute('class', 'title column');
 			if (post._embedded['wp:featuredmedia']['0'].source_url) {
-			// if (post.id) {
-				const imgLink = document.createElement('img');
-				imgLink.setAttribute('src', post._embedded['wp:featuredmedia']['0'].source_url);
-				singlePost.appendChild(imgLink);
+				link.setAttribute('data-bg-image', post._embedded['wp:featuredmedia']['0'].source_url);
+			} else {
+				link.setAttribute('data-bg-image', post._embedded['wp:featuredmedia']['0'].source_url);
 			}
-
+			link.textContent = post.title.rendered;
+			column33.appendChild(link);
 		});
 	} else {
 		console.log('error');
 	}
 
 }
+
+function transferComplete(){
+	console.log("Successful AJAX call");
+
+	const links = document.getElementsByTagName('a');
+	const body = document.getElementsByTagName('body')[0];
+
+	for (var i = links.length - 1; i >= 0; i--) {
+		let bgImg = links[i].attributes[2].value;
+		body.setAttribute('style','background-image: url(' + bgImg + ');');
+	}
+}
+
+request.addEventListener("load", transferComplete);
 
 request.send();
 

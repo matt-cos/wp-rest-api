@@ -41,9 +41,16 @@ function transferComplete(){
 	const body = document.getElementsByTagName('body')[0];
 
 	for (var i = links.length - 1; i >= 0; i--) {
-		let bgImg = links[i].attributes[2].value;
-		body.setAttribute('style','background-image: url(' + bgImg + ');');
+		links[i].addEventListener("mouseover", function(){
+			console.log(this.attributes[2].value);
+			let bgImg = this.attributes[2].value;
+			body.setAttribute('style','background-image: url(' + bgImg + ');');
+		});
 	}
+
+
+	// document.getElementById("demo").onmouseover = function() {mouseOver()};
+	// document.getElementById("demo").onmouseout = function() {mouseOut()};
 }
 
 request.addEventListener("load", transferComplete);

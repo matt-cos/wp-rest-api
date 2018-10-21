@@ -12,7 +12,7 @@ request.onload = function(){
 			container.appendChild(singlePost);
 
 			const column33 = document.createElement('div');
-			column33.setAttribute('class', 'column column-33');
+			column33.setAttribute('class', 'column column-50');
 			singlePost.appendChild(column33);
 
 			const postLink = 'https://bmwmovement.org/wp-json/wp/v2/posts/' + post.id;
@@ -38,7 +38,7 @@ function transferComplete(){
 	console.log("Successful AJAX call");
 
 	const links = document.getElementsByTagName('a');
-	const body = document.getElementsByTagName('body')[0];
+	const body = document.getElementsByClassName('bg-img')[0];
 
 	for (var i = links.length - 1; i >= 0; i--) {
 		links[i].addEventListener("mouseover", function(){

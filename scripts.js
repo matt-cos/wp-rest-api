@@ -15,7 +15,9 @@ request.onload = function(){
 			column33.setAttribute('class', 'column column-50');
 			singlePost.appendChild(column33);
 
-			const postLink = 'https://bmwmovement.org/wp-json/wp/v2/posts/' + post.id;
+			const postLink = 'file:///Users/mattcos/Development/wp-rest-api/portfolio-item/' + post.slug;
+
+			// https://router.vuejs.org/guide/essentials/dynamic-matching.html
 
 			const link = document.createElement('a');
 			link.setAttribute('href', postLink);
@@ -47,10 +49,6 @@ function transferComplete(){
 			body.setAttribute('style','background-image: url(' + bgImg + ');');
 		});
 	}
-
-
-	// document.getElementById("demo").onmouseover = function() {mouseOver()};
-	// document.getElementById("demo").onmouseout = function() {mouseOut()};
 }
 
 request.addEventListener("load", transferComplete);

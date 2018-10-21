@@ -7,9 +7,12 @@
 
 	<title>WordPress REST API</title>
 
-	<link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+	<link rel="stylesheet" href="https://cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
 	<link href="styles/milligram.min.css" rel="stylesheet">
 	<link href="styles/style.css" rel="stylesheet">
+
+	<script src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
+	<script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
 
 </head>
 
@@ -23,10 +26,26 @@
 		</div>
 	</div>
 
+	<div id="app-4">
+		<!-- <ol>
+			<li v-for="todo in todos">
+				<span v-html="todo.text"></span>
+			</li>
+		</ol> -->
+
+		<span v-for="todo in todos" v-html="todo.text">
+		</span>
+	</div>
+
+
 	<div id="root"></div>
 
-	<script src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
-	<script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+	<!-- <div class="row post post-id-313">
+		<div class="column column-50">
+			<a href="file:///Users/mattcos/Development/wp-rest-api/portfolio-item/the-bmw-group-is-working-to-achieve-sustainable-development-goals" class="title column" data-bg-image="https://bmwmovement.org/wp-content/uploads/2018/10/bmw-movement-sustainable-development-goals.png">The BMW Group is Working to Achieve Sustainable Development Goals</a>
+		</div>
+	</div> -->
+
 	<script src="scripts.js"></script>
 </body>
 

@@ -1,3 +1,5 @@
+var test, gobble;
+
 var request = new XMLHttpRequest();
 
 request.open('GET', 'https://bmwmovement.org/wp-json/wp/v2/posts?_embed', true);
@@ -10,6 +12,8 @@ request.onload = function(){
 			const singlePost = document.createElement('div');
 			singlePost.setAttribute('class', 'row post post-id-' + post.id);
 			container.appendChild(singlePost);
+
+
 
 			const column33 = document.createElement('div');
 			column33.setAttribute('class', 'column column-50');
@@ -29,6 +33,10 @@ request.onload = function(){
 			}
 			link.textContent = post.title.rendered;
 			column33.appendChild(link);
+
+			gobble = '<div class="row post postid-' + post.id + '"><div class="column column-50"><a href="file:///Users/mattcos/Development/wp-rest-api/portfolio-item/' + post.slug + '" class="title columm">' + post.slug + '</a></div></div>';
+
+			app4.todos.push({ text: gobble });
 		});
 	} else {
 		console.log('error');
@@ -50,6 +58,18 @@ function transferComplete(){
 		});
 	}
 }
+
+var app4 = new Vue({
+	el: '#app-4',
+	data: {
+		todos: [
+			// { text: 'Learn JavaScript' },
+			// { text: 'Learn Vue' },
+			// { text: 'Build something awesome' }
+		]
+	}
+});
+
 
 request.addEventListener("load", transferComplete);
 

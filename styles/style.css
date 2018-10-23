@@ -22,19 +22,22 @@
 	background-position: center center;
 	top: 0;
 	left: 0;
-	opacity: 0.5;
-	filter: grayscale(50%);
+	/*opacity: 0.3;
+	filter: grayscale(50%);*/
+	opacity: 0.05;
+	filter: grayscale(100%);
 }
 
-.title__wrapper {
+.title {
 	-webkit-transition: 0.3s all;
 	-o-transition: 0.3s all;
 	transition: 0.3s all;
 	transform-origin: left center;
-
+	margin: 10px 0;
+	display: block;
 }
 
-.title__wrapper:hover {
+.title:hover {
 	-webkit-transform: scale(1.2);
 	-ms-transform: scale(1.2);
 	-o-transform: scale(1.2);

@@ -17,7 +17,12 @@
 </head>
 
 <body>
+	<div id="loader">
+		<div class="loader__content">LOADING...</div>
+	</div>
+
 	<div class="bg-img"></div>
+
 	<div class="container">
 		<div class="row">
 			<div class="column">
@@ -26,19 +31,12 @@
 		</div>
 	</div>
 
-	<div id="app-4">
-		<!-- <ol>
-			<li v-for="todo in todos">
-				<span v-html="todo.text"></span>
-			</li>
-		</ol> -->
-
-		<span v-for="todo in todos" v-html="todo.text">
-		</span>
+	<div id="vue-app" class="container">
+		<span v-for="todo in todos" v-html="todo.text"></span>
 	</div>
 
 
-	<div id="root"></div>
+	<!-- <div id="root"></div> -->
 
 	<!-- <div class="row post post-id-313">
 		<div class="column column-50">

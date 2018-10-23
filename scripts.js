@@ -1,48 +1,11 @@
-var test, gobble;
+var wpOutput;
 
 var request = new XMLHttpRequest();
 
+request.addEventListener("progress", updateProgress);
+request.addEventListener("load", transferComplete);
+
 request.open('GET', 'https://bmwmovement.org/wp-json/wp/v2/posts?_embed', true);
-
-request.onload = function(){
-	var data = JSON.parse(this.response);
-
-	if (request.status >= 200 && request.status < 400) {
-		data.forEach(post => {
-			const singlePost = document.createElement('div');
-			singlePost.setAttribute('class', 'row post post-id-' + post.id);
-			container.appendChild(singlePost);
-
-
-
-			const column33 = document.createElement('div');
-			column33.setAttribute('class', 'column column-50');
-			singlePost.appendChild(column33);
-
-			const postLink = 'file:///Users/mattcos/Development/wp-rest-api/portfolio-item/' + post.slug;
-
-			// https://router.vuejs.org/guide/essentials/dynamic-matching.html
-
-			const link = document.createElement('a');
-			link.setAttribute('href', postLink);
-			link.setAttribute('class', 'title column');
-			if (post._embedded['wp:featuredmedia']['0'].source_url) {
-				link.setAttribute('data-bg-image', post._embedded['wp:featuredmedia']['0'].source_url);
-			} else {
-				link.setAttribute('data-bg-image', post._embedded['wp:featuredmedia']['0'].source_url);
-			}
-			link.textContent = post.title.rendered;
-			column33.appendChild(link);
-
-			gobble = '<div class="row post postid-' + post.id + '"><div class="column column-50"><a href="file:///Users/mattcos/Development/wp-rest-api/portfolio-item/' + post.slug + '" class="title columm">' + post.slug + '</a></div></div>';
-
-			app4.todos.push({ text: gobble });
-		});
-	} else {
-		console.log('error');
-	}
-
-}
 
 function transferComplete(){
 	console.log("Successful AJAX call");
@@ -57,10 +20,38 @@ function transferComplete(){
 			body.setAttribute('style','background-image: url(' + bgImg + ');');
 		});
 	}
+
+	document.getElementById('loader').style.display = 'none';
+}
+
+function updateProgress (oEvent) {
+	if (oEvent.lengthComputable) {
+		var percentComplete = oEvent.loaded / oEvent.total * 100;
+		console.log(percentComplete);
+	} else {
+		console.log('// Unable to compute progress information since the total size is unknown. belive it has to do with the "file://"');
+	}
+}
+
+request.onload = function(){
+	var data = JSON.parse(this.response);
+
+	if (request.status >= 200 && request.status < 400) {
+		data.forEach(post => {
+			wpOutput = '<div class="row post postid-' + post.id + '"><div class="column column-50 title__wrapper"><a href="file:///Users/mattcos/Development/wp-rest-api/portfolio-item/' + post.slug + '" class="title">' + post.title.rendered + '</a></div></div>';
+
+			app4.todos.push({ text: wpOutput });
+
+			// https://router.vuejs.org/guide/essentials/dynamic-matching.html
+		});
+	} else {
+		console.log('error');
+	}
+
 }
 
 var app4 = new Vue({
-	el: '#app-4',
+	el: '#vue-app',
 	data: {
 		todos: [
 			// { text: 'Learn JavaScript' },
@@ -70,14 +61,11 @@ var app4 = new Vue({
 	}
 });
 
-
-request.addEventListener("load", transferComplete);
-
 request.send();
 
-const app = document.getElementById('root');
+// const app = document.getElementById('root');
 
-const container = document.createElement('div');
-container.setAttribute('class', 'container');
+// const container = document.createElement('div');
+// container.setAttribute('class', 'container');
 
-app.appendChild(container);
+// app.appendChild(container);

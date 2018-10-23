@@ -63,9 +63,35 @@ request.send();
 
 request.addEventListener("load", transferComplete);
 
+
+
+
 // const app = document.getElementById('root');
 
 // const container = document.createElement('div');
 // container.setAttribute('class', 'container');
 
 // app.appendChild(container);
+
+
+
+
+
+// https://medium.com/frontend-fun/vuejs-routing-with-vue-router-1548f94c0575
+const Foo = { template: '<h1>FOO</h1>'};
+const About = { template: '<h1>ABOUT</h1>'};
+
+const routes = [
+	{ path: '/foo', component: Foo },
+	{ path: '/bar', redirect: '/foo' },
+	{ path: '/about', component: About },
+];
+
+const router = new VueRouter({
+	// mode: 'history',
+	routes
+})
+
+const app = new Vue({
+	router
+}).$mount('#app');
